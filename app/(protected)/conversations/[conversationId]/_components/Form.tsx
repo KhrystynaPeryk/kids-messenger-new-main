@@ -49,7 +49,19 @@ const Form = () => {
     }
 
     return (
-        <div className="py-4 px-4 bg-white border-t flex items-center gap-2 lg:gap-4 w-full">
+        <div className="
+        fixed
+        justify-around
+        w-full
+        bottom-0
+        left-0
+        z-40
+        flex
+        items-center
+        bg-white
+        border-y-[1px]
+        py-4 px-4 border-t  gap-2 lg:gap-4
+    ">
             <CldUploadButton options={{maxFiles: 1}} uploadPreset="Kids-messenger-image" onSuccess={handleUpload}>
                 <HiPhoto size={30} className="text-sky-500"/>
             </CldUploadButton>
