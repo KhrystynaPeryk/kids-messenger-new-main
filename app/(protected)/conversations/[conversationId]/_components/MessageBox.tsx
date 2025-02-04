@@ -6,6 +6,8 @@ import { useCurrentUser } from "@/hooks/use-current-user"
 import clsx from "clsx"
 import {format} from "date-fns"
 import Image from "next/image"
+import { useState } from "react"
+import ImageModal from "./ImageModal"
 
 interface MessageBoxProps {
     data: FullMessageType
@@ -15,6 +17,8 @@ interface MessageBoxProps {
 const MessageBox = ({data, isLast} : MessageBoxProps) => {
     const user = useCurrentUser()
     const isOwn = user?.email === data?.sender?.email
+
+    const [imageModalOpen, setImageModalOpen] = useState(false)
 
     const seenList = (data.seen || []) // in case seen is an undefined we should || [] otherwise it will throw an error
         .filter((user) => user.email !== data?.sender?.email) // removing a current user (sender) name from the list
@@ -54,8 +58,14 @@ const MessageBox = ({data, isLast} : MessageBoxProps) => {
                     </div>
                 </div>
                 <div className={message}>
+                    <ImageModal 
+                        src={data.image}
+                        isOpen={imageModalOpen}
+                        onClose={() => setImageModalOpen(false)}
+                    />
                     {data.image ? (
                         <Image 
+                            onClick={() => setImageModalOpen(true)}
                             alt="image"
                             height="288"
                             width="288"
