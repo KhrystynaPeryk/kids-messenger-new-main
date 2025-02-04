@@ -54,12 +54,27 @@ const Body = ({initialMessages}: BodyProps) => {
             bottomRef?.current?.scrollIntoView()
         }
 
+        const updateMessageHandler = (newMessage: FullMessageType) => {
+            setMessages((current) => current.map((currentMessage) => {
+                // if we find the exact message we are looking at, update/replace it with a newMessage
+                if (currentMessage.id === newMessage.id) {
+                    return newMessage
+                }
+
+                // otherwise return it as it is
+                return currentMessage
+            }))
+        }
+
         pusherClient.bind('messages:new', messageHandler)
+
+        pusherClient.bind('message:update', updateMessageHandler)
 
         //every time we bind, we need to use the unmount method because otherwise it can cause an overflow - we do it by returning
         return () => {
             pusherClient.unsubscribe(conversationId)
             pusherClient.unbind('messages:new', messageHandler)
+            pusherClient.unbind('message:update', updateMessageHandler)
         }
     }, [conversationId])
     return (

@@ -1,6 +1,7 @@
 import { currentUser } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { NextResponse } from "next/server"
+import { pusherServer } from "@/lib/pusher"
 
 interface IParams {
     conversationId? : string
@@ -62,6 +63,19 @@ export async function POST(
                 }
             }
         })
+
+        await pusherServer.trigger(user.email, 'conversation:update', {
+            id: conversationId,
+            messages: [updatedMessage]
+        })
+
+        //if we saw the last message
+        if (lastMessage.seenIds.indexOf(user.id) !== -1) {
+            return NextResponse.json(conversation)
+        }
+
+        //if we did not see the last message
+        await pusherServer.trigger(conversationId!, 'message:update', updatedMessage)
 
         return NextResponse.json(updatedMessage)
     } catch (error: any) {
