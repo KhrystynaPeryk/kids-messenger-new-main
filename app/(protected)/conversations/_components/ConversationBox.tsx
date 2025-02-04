@@ -2,7 +2,6 @@
 
 import { useCallback, useMemo } from "react"
 import { useRouter } from "next/navigation"
-import { Conversation, Message, User } from "@prisma/client"
 
 import {format} from "date-fns"
 import { useCurrentUser } from "@/hooks/use-current-user"
@@ -10,12 +9,12 @@ import clsx from "clsx"
 import { FullConversationType } from "@/app/types"
 import useOtherUser from "@/hooks/use-other-user"
 import AvatarWithStatus from "../../_components/AvatarWithStatus"
+import AvatarGroup from "../../_components/AvatarGroup"
 
 interface ConversationBoxProps {
     data: FullConversationType
     selected?: boolean
 }
-
 
 const ConversationBox = ({data, selected}: ConversationBoxProps) => {
     const otherUser = useOtherUser(data)
@@ -83,7 +82,11 @@ const ConversationBox = ({data, selected}: ConversationBoxProps) => {
                 selected ? 'bg-neutral-100' : 'bg-white'
             )}
         >
-            <AvatarWithStatus user={otherUser} />
+            {data.isGroup ? (
+                <AvatarGroup users={data.users}/> 
+            ) : (
+                <AvatarWithStatus user={otherUser} />
+            )}
             <div className="min-w-0 flex-1">
                 <div className="focus:outline-none">
                     <div className="flex justify-between items-center mb-1">

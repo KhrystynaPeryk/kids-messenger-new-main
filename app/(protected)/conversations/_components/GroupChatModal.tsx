@@ -98,7 +98,6 @@ const GroupChatModal = ({isOpen, onClose, users}: GroupChatModalProps) => {
                 <div className="mt-6 flex items-center justify-end gap-x-6">
                     <Button type="button" variant="destructive" onClick={onClose} disabled={isLoading}>Cancel</Button>
                     <Button type="submit" variant="gradient" disabled={isLoading}>Create</Button>
-
                 </div>
             </form>
         </Modal>
