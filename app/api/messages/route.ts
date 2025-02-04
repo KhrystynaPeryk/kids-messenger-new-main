@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server"
 import { currentUser } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { pusherServer } from "@/lib/pusher";
 
 export async function POST(
     request: Request
@@ -70,6 +71,18 @@ export async function POST(
                     }
                 }
             }
+        })
+
+        // this is going to add a new message in real-time
+        await pusherServer.trigger(conversationId, 'messages:new', newMessage)
+
+        const lastMessage = updatedConversation.messages[updatedConversation.messages.length - 1]
+
+        updatedConversation.users.map((user) => {
+            pusherServer.trigger(user.email!, 'conversation:update', {
+                id: conversationId,
+                messages: [lastMessage]
+            })
         })
 
         return NextResponse.json(newMessage)
