@@ -1,5 +1,6 @@
 import { currentUser } from "@/lib/auth"
 import { db } from "@/lib/db"
+import { pusherServer } from "@/lib/pusher"
 import { NextResponse } from "next/server"
 
 interface IParams {
@@ -41,6 +42,14 @@ export async function DELETE(
                 }
             }
         })
+
+        // will deletes a conversation in a real-time without a need of reloading a page
+        existingConversation.users.forEach((user) => {
+            if (user.email) {
+                pusherServer.trigger(user.email, 'conversation:remove', existingConversation)
+            }
+        })
+
         return NextResponse.json(deletedConversation)
     } catch (error: any) {
         console.log(error, "ERROR_CONVERSATION_DELETE")
