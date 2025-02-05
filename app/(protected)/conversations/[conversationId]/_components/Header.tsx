@@ -8,6 +8,7 @@ import { useMemo, useState } from "react"
 import { HiChevronLeft, HiEllipsisHorizontal } from "react-icons/hi2"
 import ProfileDrawer from "./ProfileDrawer"
 import AvatarGroup from "@/app/(protected)/_components/AvatarGroup"
+import useActiveList from "@/hooks/use-active-list"
 
 interface HeaderProps {
     conversation: Conversation & {
@@ -20,6 +21,9 @@ const Header = ({conversation}: HeaderProps) => {
     const otherUser = useOtherUser(conversation)
 
     const [drawerOpen, setDrawerOpen] = useState(false)
+    const {members} = useActiveList()
+
+    const isActive = members.indexOf(otherUser?.email!) !== -1
 
     const statusText = useMemo(() => {
         // if we are in a group we are not going to show individual online/offline status, instead we show a number of members
@@ -27,8 +31,8 @@ const Header = ({conversation}: HeaderProps) => {
             return `${conversation.users.length} members`
         }
 
-        return 'Active'
-    }, [conversation])
+        return isActive ? 'Active' : 'Offline'
+    }, [conversation, isActive])
 
     return (
         <>
