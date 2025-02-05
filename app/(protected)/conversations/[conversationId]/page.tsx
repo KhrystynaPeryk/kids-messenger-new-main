@@ -5,15 +5,13 @@ import Header from "./_components/Header"
 import Body from "./_components/Body"
 import Form from "./_components/Form"
 
-interface IParams{
-    conversationId: string
-}
+// interface IParams{
+//     conversationId: string
+// }
 
-const ConversationId = async( {params}: {params: IParams} ) => {
+const ConversationId = async( {params, searchParams}: any ) => {
 
-    const par = await params
-
-    const conversationId = await par.conversationId
+    const { conversationId } = await params;
 
     const conversation = await getConversationById(conversationId)
     const messages = await getMessages(conversationId)
