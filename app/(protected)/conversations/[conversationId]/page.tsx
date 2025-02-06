@@ -9,7 +9,7 @@ import Form from "./_components/Form"
 //     conversationId: string
 // }
 
-const ConversationId = async( {params, searchParams}: any ) => {
+const ConversationId = async( {params}: any ) => {
 
     const { conversationId } = await params;
 

@@ -54,7 +54,7 @@ const MessageBox = ({data, isLast} : MessageBoxProps) => {
                         {data.sender.name}
                     </div>
                     <div className="text-xs text-gray-400">
-                        {format(new Date(data.createAt), 'p')}
+                        {format(new Date(data.createdAt), 'p')}
                     </div>
                 </div>
                 <div className={message}>

@@ -9,7 +9,7 @@ import { pusherServer } from "@/lib/pusher"
 
 export async function POST(
     request: Request,
-    {params, searchParams}: any
+    {params}: any
 ) {
     try {
         const user = await currentUser()

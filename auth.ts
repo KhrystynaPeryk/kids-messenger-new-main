@@ -92,7 +92,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             //more properties for a messenger
             token.conversationIds = existingUser.conversationIds;
             token.seenMessageIds = existingUser.seenMessageIds;
-            token.createdAt = existingUser.createAt;
+            token.createdAt = existingUser.createdAt;
             token.updatedAt = existingUser.updatedAt;
 
             token.id = existingUser.id

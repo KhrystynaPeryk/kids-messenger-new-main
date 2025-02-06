@@ -14,7 +14,7 @@ const getUsers = async () => {
         // we are finding all the users EXCEPT our own user
         const users = await db.user.findMany({
             orderBy: {
-                createAt: 'desc',
+                createdAt: 'desc',
             },
             where: {
                 NOT: {

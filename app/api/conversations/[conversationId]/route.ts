@@ -9,7 +9,7 @@ import { NextResponse } from "next/server"
 
 export async function DELETE(
     request: Request,
-    {params, searchParams}: any
+    {params}: any
 ) {
     try {
         const user = await currentUser()
