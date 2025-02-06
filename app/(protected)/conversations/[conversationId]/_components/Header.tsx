@@ -23,7 +23,9 @@ const Header = ({conversation}: HeaderProps) => {
     const [drawerOpen, setDrawerOpen] = useState(false)
     const {members} = useActiveList()
 
-    const isActive = members.indexOf(otherUser?.email!) !== -1
+    // const isActive = members.indexOf(otherUser?.email!) !== -1
+    const isActive = otherUser?.email ? members.includes(otherUser.email) : false;
+
 
     const statusText = useMemo(() => {
         // if we are in a group we are not going to show individual online/offline status, instead we show a number of members

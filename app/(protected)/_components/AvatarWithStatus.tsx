@@ -10,7 +10,9 @@ interface AvatarWithStatusProps {
 
 const AvatarWithStatus = ({user}: AvatarWithStatusProps) => {
     const {members} = useActiveList()
-    const isActive = members.indexOf(user?.email!) !== -1
+    // const isActive = members.indexOf(user?.email!) !== -1
+    const isActive = user?.email ? members.includes(user.email) : false;
+    
     return (
         <div className="relative">
             <div className="relative inline-block rounded-full overflow-hidden h-9 w-9 md:h-11 md:w-11">

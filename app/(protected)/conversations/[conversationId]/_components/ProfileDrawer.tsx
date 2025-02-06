@@ -26,7 +26,8 @@ const ProfileDrawer = ({isOpen, onClose, data}: ProfileDrawerProps) => {
     const [confirmOpen, setConfirmOpen] = useState(false)
     const {members} = useActiveList()
 
-    const isActive = members.indexOf(otherUser?.email!) !== -1
+    // const isActive = members.indexOf(otherUser?.email!) !== -1
+    const isActive = otherUser?.email ? members.includes(otherUser.email) : false;
 
     const joinedDate = useMemo(() => {
         return format(new Date(otherUser.createdAt), 'PP')
