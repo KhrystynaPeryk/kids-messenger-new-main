@@ -1,7 +1,6 @@
 "use client"
 
 import useRoutes from "@/hooks/use-routes"
-import { useState } from "react"
 import DesktopItem from "./DesktopItem"
 import { User } from "@prisma/client"
 import AvatarWithStatus from "../AvatarWithStatus"
@@ -12,7 +11,6 @@ interface DesktopSidebarProps {
 
 const DesktopSidebar = ({currentUser}: DesktopSidebarProps) => {
     const routes = useRoutes()
-    const [isOpen, setIsOpen] = useState(false)
 
     return (
         <div className="
@@ -65,10 +63,8 @@ const DesktopSidebar = ({currentUser}: DesktopSidebarProps) => {
                 justify-between
                 items-center
             ">
-                <div 
-                    onClick={() => setIsOpen(true)}
-                >
-                <AvatarWithStatus user={currentUser}/>
+                <div>
+                    <AvatarWithStatus user={currentUser}/>
                 </div>
             </nav>
         </div>

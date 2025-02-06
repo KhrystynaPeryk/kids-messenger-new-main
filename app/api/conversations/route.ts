@@ -112,6 +112,6 @@ export async function POST( request: Request) {
         return NextResponse.json(newConversation)
 
     } catch (error: any) {
-        return new NextResponse('Internal error', {status: 500})
+        return new NextResponse(`Internal error: ${error}`, {status: 500})
     }
 }

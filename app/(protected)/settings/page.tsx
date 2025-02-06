@@ -140,7 +140,7 @@ const SettingsPage = () => {
                                 )}/>
 
 
-                                <FormField control={form.control} name="image" render={({field}) => (
+                                <FormField control={form.control} name="image" render={() => (
                                     <FormItem>
                                         <FormLabel>Profile Image</FormLabel>
                                             <FormControl>

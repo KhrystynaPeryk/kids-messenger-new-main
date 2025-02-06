@@ -1,6 +1,7 @@
 "use client"
 
 import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form"
+import clsx from "clsx"
 
 interface MessageInputProps {
     placeholder?: string,
@@ -20,16 +21,18 @@ const MessageInput = ({placeholder, id, type, required, register, errors}: Messa
                 autoComplete={id}
                 {...register(id, {required})}
                 placeholder={placeholder}
-                className="
-                    text-black
-                    font-light
-                    py-2
-                    px-4
-                    bg-neutral-100
-                    w-full
-                    rounded-full
-                    focus:outline-none
-                "
+                className={clsx(`
+                        text-black
+                        font-light
+                        py-2
+                        px-4
+                        bg-neutral-100
+                        w-full
+                        rounded-full
+                        focus:outline-none
+                    `,
+                    errors[id] && "focus:ring-rose-500",
+                )}
             />
         </div>
     )

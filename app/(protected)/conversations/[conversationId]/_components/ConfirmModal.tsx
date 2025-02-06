@@ -32,7 +32,7 @@ const ConfirmModal = ({isOpen, onClose}: ConfrimModalProps) => {
         .then(() => {
             onClose()
             router.push('/conversations')
-            router.refresh
+            router.refresh()
         })
         .catch(() => toast.error('Something went wrong!'))
         .finally(() => setIsLoading(false))
