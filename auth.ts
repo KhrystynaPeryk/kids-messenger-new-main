@@ -69,7 +69,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             return session
         },
         async jwt({token}) {
-            console.log("I am beign called again - from auth.ts")
             // token.sub - gives the id of the user from Neon db
 
             if (!token.sub) return token

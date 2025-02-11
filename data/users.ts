@@ -4,8 +4,6 @@ import { currentUser } from "@/lib/auth";
 const getUsers = async () => {
     const user = await currentUser()
 
-    console.log({userFromDataUsers: user})
-
     if (!user?.email) {
         return []
     }
