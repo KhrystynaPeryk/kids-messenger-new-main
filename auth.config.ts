@@ -1,11 +1,11 @@
-import Credentials from 'next-auth/providers/credentials'
+// import Credentials from 'next-auth/providers/credentials'
 import Github from "next-auth/providers/github"
 import Google from "next-auth/providers/google"
 import type { NextAuthConfig } from "next-auth"
-import bcrypt from 'bcryptjs'
+// import bcrypt from 'bcryptjs'
 
-import { LoginSchema } from './schemas'
-import { getUserByEmail } from './data/user'
+// import { LoginSchema } from './schemas'
+// import { getUserByEmail } from './data/user'
 
 export default { providers: [
     // you can see a list of providers at http://localhost:3000/api/auth/providers
@@ -17,23 +17,23 @@ export default { providers: [
         clientId: process.env.GITHUB_CLIENT_ID,
         clientSecret: process.env.GITHUB_CLIENT_SECRET
     }),
-    Credentials({
-        async authorize(credentials) {
-            const validatedFields = LoginSchema.safeParse(credentials)
+    // Credentials({
+    //     async authorize(credentials) {
+    //         const validatedFields = LoginSchema.safeParse(credentials)
 
-            if (validatedFields.success) {
-                const {email, password} = validatedFields.data
+    //         if (validatedFields.success) {
+    //             const {email, password} = validatedFields.data
 
-                const user = await getUserByEmail(email)
-                if (!user || !user.password) return null
-                const passwordsMatch = await bcrypt.compare(
-                    password,
-                    user.password
-                )
+    //             const user = await getUserByEmail(email)
+    //             if (!user || !user.password) return null
+    //             const passwordsMatch = await bcrypt.compare(
+    //                 password,
+    //                 user.password
+    //             )
 
-                if (passwordsMatch) return user
-            }
-            return null
-        }
-    })
+    //             if (passwordsMatch) return user
+    //         }
+    //         return null
+    //     }
+    // })
 ]} satisfies NextAuthConfig

@@ -53,7 +53,7 @@ export const LoginForm = () => {
     }
     return (
         <CardWrapper
-            headerLabel="Welcome back!"
+            headerLabel="Log in with Google or Github"
             backButtonLabel="Don't have an account?"
             backButtonHref="/auth/register"
             showSocial
